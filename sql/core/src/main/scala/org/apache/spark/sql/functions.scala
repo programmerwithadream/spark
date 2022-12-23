@@ -4101,6 +4101,12 @@ object functions {
    * @since 3.0.0
    */
   def filter(column: Column, f: Column => Column): Column = withExpr {
+    // scalastyle:off println
+    println("FIRST FILTER FUNCTION")
+    println(column)
+    println(f)
+    // scalastyle:on println
+
     ArrayFilter(column.expr, createLambda(f))
   }
 
@@ -4118,6 +4124,12 @@ object functions {
    * @since 3.0.0
    */
   def filter(column: Column, f: (Column, Column) => Column): Column = withExpr {
+    // scalastyle:off println
+    println("SECOND FILTER FUNCTION")
+    println(column)
+    println(f)
+    // scalastyle:on println
+
     ArrayFilter(column.expr, createLambda(f))
   }
 

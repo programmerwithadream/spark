@@ -302,6 +302,13 @@ case class ArrayTransform(
   override def dataType: ArrayType = ArrayType(function.dataType, function.nullable)
 
   override def bind(f: (Expression, Seq[(DataType, Boolean)]) => LambdaFunction): ArrayTransform = {
+    // scalastyle:off println
+    println("THE BIND FUNCTION WAS CALLED WITH THE INPUTS: ")
+    println(f)
+    println(function)
+    println(argument)
+    // scalastyle:on println
+
     val ArrayType(elementType, containsNull) = argument.dataType
     function match {
       case LambdaFunction(_, arguments, _) if arguments.size == 2 =>
@@ -322,6 +329,12 @@ case class ArrayTransform(
   }
 
   override def nullSafeEval(inputRow: InternalRow, argumentValue: Any): Any = {
+    // scalastyle:off println
+    println("NULLSAFEEVAL WAS CALLED WITH INPUTS: ")
+    println(inputRow)
+    println(argumentValue)
+    // scalastyle:on println
+
     val arr = argumentValue.asInstanceOf[ArrayData]
     val f = functionForEval
     val result = new GenericArrayData(new Array[Any](arr.numElements))
