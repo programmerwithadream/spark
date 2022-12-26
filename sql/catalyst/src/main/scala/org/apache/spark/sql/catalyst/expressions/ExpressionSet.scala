@@ -82,12 +82,20 @@ class ExpressionSet protected(
   def contains(elem: Expression): Boolean = baseSet.contains(elem.canonicalized)
 
   override def filter(p: Expression => Boolean): ExpressionSet = {
+    // scalastyle:off println
+    println("FILTER IN EXPRESSIONSET WAS EXECUTED ON:")
+    println(p)
+    // scalastyle:on println
     val newBaseSet = baseSet.filter(e => p(e.canonicalized))
     val newOriginals = originals.filter(e => p(e.canonicalized))
     new ExpressionSet(newBaseSet, newOriginals)
   }
 
   override def filterNot(p: Expression => Boolean): ExpressionSet = {
+    // scalastyle:off println
+    println("NOTFILTER IN EXPRESSIONSET WAS EXECUTED ON:")
+    println(p)
+    // scalastyle:on println
     val newBaseSet = baseSet.filterNot(e => p(e.canonicalized))
     val newOriginals = originals.filterNot(e => p(e.canonicalized))
     new ExpressionSet(newBaseSet, newOriginals)

@@ -1651,6 +1651,10 @@ class Dataset[T] private[sql](
    * @since 1.6.0
    */
   def filter(condition: Column): Dataset[T] = withTypedPlan {
+    // scalastyle:off println
+    println("FILTER 1 IN DATASET WAS EXECUTED ON:")
+    println(condition)
+    // scalastyle:on println
     Filter(condition.expr, logicalPlan)
   }
 
@@ -1664,6 +1668,10 @@ class Dataset[T] private[sql](
    * @since 1.6.0
    */
   def filter(conditionExpr: String): Dataset[T] = {
+    // scalastyle:off println
+    println("FILTER 2 IN DATASET WAS EXECUTED ON:")
+    println(conditionExpr)
+    // scalastyle:on println
     filter(Column(sparkSession.sessionState.sqlParser.parseExpression(conditionExpr)))
   }
 
