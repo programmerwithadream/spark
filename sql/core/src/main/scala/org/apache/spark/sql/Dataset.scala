@@ -1655,7 +1655,13 @@ class Dataset[T] private[sql](
     println("FILTER 1 IN DATASET WAS EXECUTED ON:")
     println(condition)
     // scalastyle:on println
-    Filter(condition.expr, logicalPlan)
+    val startTime = System.nanoTime()
+    val ret = Filter(condition.expr, logicalPlan)
+    val endTime = System.nanoTime()
+    // scalastyle:off println
+    println("time: " + (endTime - startTime)/1e6 + "ms")
+    // scalastyle:on println
+    ret
   }
 
   /**
