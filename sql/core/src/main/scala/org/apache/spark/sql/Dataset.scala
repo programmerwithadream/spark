@@ -3903,21 +3903,7 @@ class Dataset[T] private[sql](
 
   /** A convenient function to wrap a logical plan and produce a Dataset. */
   @inline private def withTypedPlan[U : Encoder](logicalPlan: LogicalPlan): Dataset[U] = {
-    // scalastyle:off println
-    println("WITHTYPEDPLAN IN DATASET WAS EXECUTED ON:")
-    println(logicalPlan)
-    // scalastyle:on println
-
-    val startTime = System.nanoTime()
-    val x = Dataset(sparkSession, logicalPlan)
-    val endTime = System.nanoTime()
-
-    val duration = (endTime - startTime) / 1000000
-    // scalastyle:off println
-    println("WITHTYPEDPLAN IN DATASET WAS EXECUTION TIME WAS : " + duration + "ms")
-    // scalastyle:on println
-
-    x
+    Dataset(sparkSession, logicalPlan)
   }
 
   /** A convenient function to wrap a set based logical plan and produce a Dataset. */
