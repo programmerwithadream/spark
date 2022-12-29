@@ -84,7 +84,14 @@ abstract class LogicalPlan
    * unresolved [[Attribute]]s.
    */
   def resolve(schema: StructType, resolver: Resolver): Seq[Attribute] = {
-    schema.map { field =>
+    // scalastyle:off println
+    println("RESOLVE IN LOGICALPLAN WAS EXECUTED ON: ")
+    println(schema)
+    println(resolver)
+    // scalastyle:on println
+
+    val startTime = System.nanoTime()
+    val x = schema.map { field =>
       resolve(field.name :: Nil, resolver).map {
         case a: AttributeReference => a
         case _ => throw QueryExecutionErrors.resolveCannotHandleNestedSchema(this)
@@ -93,6 +100,14 @@ abstract class LogicalPlan
           field.name, output.map(_.name).mkString(", "))
       }
     }
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1000000
+
+    // scalastyle:off println
+    println("RESOLVE IN LOGICALPLAN EXECUTION TIME WAS: " + duration + "ms")
+    // scalastyle:on println
+
+    x
   }
 
   private[this] lazy val childAttributes = AttributeSeq(children.flatMap(_.output))
@@ -153,11 +168,25 @@ abstract class LogicalPlan
    *  - the order is equal too.
    */
   def sameOutput(other: LogicalPlan): Boolean = {
+    // scalastyle:off println
+    println("SAMEOUTPUT IN LOGICALPLAN WAS EXECUTED ON: ")
+    println(other)
+    // scalastyle:on println
+
+    val startTime = System.nanoTime()
     val thisOutput = this.output
     val otherOutput = other.output
-    thisOutput.length == otherOutput.length && thisOutput.zip(otherOutput).forall {
+    val x = thisOutput.length == otherOutput.length && thisOutput.zip(otherOutput).forall {
       case (a1, a2) => a1.semanticEquals(a2)
     }
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime)/ 1000000
+
+    // scalastyle:off println
+    println("SAMEOUTPUT IN LOGICALPLAN EXECUTION TIME WAS: " + duration + "ms")
+    // scalastyle:on println
+
+    x
   }
 }
 
@@ -180,6 +209,12 @@ trait UnaryNode extends LogicalPlan with UnaryLike[LogicalPlan] {
    * original constraint expressions with the corresponding alias
    */
   protected def getAllValidConstraints(projectList: Seq[NamedExpression]): ExpressionSet = {
+    // scalastyle:off println
+    println("GETALLVALIDCONSTRAINTS IN LOGICALPLAN WAS EXECUTED ON: ")
+    println(projectList)
+    // scalastyle:on println
+
+    val startTime = System.nanoTime()
     var allConstraints = child.constraints
     projectList.foreach {
       case a @ Alias(l: Literal, _) =>
@@ -193,6 +228,12 @@ trait UnaryNode extends LogicalPlan with UnaryLike[LogicalPlan] {
         allConstraints += EqualNullSafe(e, a.toAttribute)
       case _ => // Don't change.
     }
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1000000
+
+    // scalastyle:off println
+    println("GETALLVALIDCONSTRAINTS IN LOGICALPLAN EXECUTION TIME WAS: " + duration + "ms")
+    // scalastyle:on println
 
     allConstraints
   }
@@ -206,6 +247,9 @@ trait UnaryNode extends LogicalPlan with UnaryLike[LogicalPlan] {
 trait BinaryNode extends LogicalPlan with BinaryLike[LogicalPlan]
 
 abstract class OrderPreservingUnaryNode extends UnaryNode {
+  // scalastyle:off println
+  println("ORDERPRESERVINGUNARYNODE WAS EXECUTED.")
+  // scalastyle:on println
   override final def outputOrdering: Seq[SortOrder] = child.outputOrdering
 }
 

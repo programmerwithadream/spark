@@ -163,6 +163,12 @@ case class Generate(
 
 case class Filter(condition: Expression, child: LogicalPlan)
   extends OrderPreservingUnaryNode with PredicateHelper {
+  // scalastyle:off println
+  println("FILTER IN BASICLOGICALOPERATORS WAS EXECUTED ON:")
+  println(condition)
+  println(child)
+  // scalastyle:on println
+  val startTime = System.nanoTime()
   override def output: Seq[Attribute] = child.output
 
   override def maxRows: Option[Long] = child.maxRows
@@ -178,6 +184,13 @@ case class Filter(condition: Expression, child: LogicalPlan)
 
   override protected def withNewChildInternal(newChild: LogicalPlan): Filter =
     copy(child = newChild)
+
+  val endTime = System.nanoTime()
+  val duration = endTime - startTime
+
+  // scalastyle:off println
+  println("FILTER IN BASICLOGICALOPERATORS SETUP TIME WAS: " + duration)
+  // scalastyle:on println
 }
 
 abstract class SetOperation(left: LogicalPlan, right: LogicalPlan) extends BinaryNode {
