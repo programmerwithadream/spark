@@ -3914,7 +3914,7 @@ class Dataset[T] private[sql](
 
     val duration = (endTime - startTime) / 1000000
     // scalastyle:off println
-    println("WITHTYPEDPLAN IN DATASET WAS EXECUTION TIME WAS :" + duration + "ms")
+    println("WITHTYPEDPLAN IN DATASET WAS EXECUTION TIME WAS : " + duration + "ms")
     // scalastyle:on println
 
     x
