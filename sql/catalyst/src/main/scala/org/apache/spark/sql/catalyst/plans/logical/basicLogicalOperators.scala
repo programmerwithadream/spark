@@ -176,9 +176,15 @@ case class Filter(condition: Expression, child: LogicalPlan)
   final override val nodePatterns: Seq[TreePattern] = Seq(FILTER)
 
   override protected lazy val validConstraints: ExpressionSet = {
+    val startTime = System.nanoTime()
     val predicates = splitConjunctivePredicates(condition)
       .filterNot(SubqueryExpression.hasCorrelatedSubquery)
     child.constraints.union(ExpressionSet(predicates))
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1000000
+    // scalastyle:off println
+    println("VALIDCONSTRAINTS IN FILTER-BASICLOGICALOPERATOR EXECUTION TIME WAS:" + duration + "ms")
+    // scalastyle:on println
   }
 
   override protected def withNewChildInternal(newChild: LogicalPlan): Filter =
