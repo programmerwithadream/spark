@@ -86,9 +86,16 @@ class ExpressionSet protected(
     println("FILTER IN EXPRESSIONSET WAS EXECUTED ON:")
     println(p)
     // scalastyle:on println
+    val startTime = System.nanoTime()
     val newBaseSet = baseSet.filter(e => p(e.canonicalized))
     val newOriginals = originals.filter(e => p(e.canonicalized))
-    new ExpressionSet(newBaseSet, newOriginals)
+    val ret = new ExpressionSet(newBaseSet, newOriginals)
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1e6
+    // scalastyle:off println
+    println("FILTER in EXPRESSIONSET duration: " + duration + "ms")
+    // scalastyle:on println
+    ret
   }
 
   override def filterNot(p: Expression => Boolean): ExpressionSet = {
@@ -96,9 +103,16 @@ class ExpressionSet protected(
     println("NOTFILTER IN EXPRESSIONSET WAS EXECUTED ON:")
     println(p)
     // scalastyle:on println
+    val startTime = System.nanoTime()
     val newBaseSet = baseSet.filterNot(e => p(e.canonicalized))
     val newOriginals = originals.filterNot(e => p(e.canonicalized))
-    new ExpressionSet(newBaseSet, newOriginals)
+    val ret = new ExpressionSet(newBaseSet, newOriginals)
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1e6
+    // scalastyle:off println
+    println("FILTER in EXPRESSIONSET duration: " + duration + "ms")
+    // scalastyle:on println
+    ret
   }
 
   def +(elem: Expression): ExpressionSet = {
