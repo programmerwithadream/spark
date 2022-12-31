@@ -28,4 +28,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: cdrpl/custom:latest
+          tags: justinshyi/spark-custom:latest
