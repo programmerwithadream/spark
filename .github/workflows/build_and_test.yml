@@ -23,6 +23,7 @@ on:
   push:
     branches:
     - '**'
+    - '!custom'
   workflow_call:
     inputs:
       ansi_enabled:
