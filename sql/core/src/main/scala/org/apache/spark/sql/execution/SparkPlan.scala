@@ -424,7 +424,13 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     byteArrayRdd.collect().foreach { countAndBytes =>
       decodeUnsafeRows(countAndBytes._2).foreach(results.+=)
     }
-    results.toArray
+    val ret = results.toArray
+    // scalastyle:off println
+    println("EXECUTECOLLECT in SparkPlan")
+    println("RETURN VALUE from EXECUTECOLLECT")
+    println(results)
+    // scalastyle:on println
+    ret
   }
 
   private[spark] def executeCollectIterator(): (Long, Iterator[InternalRow]) = {
