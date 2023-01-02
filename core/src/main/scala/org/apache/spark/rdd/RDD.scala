@@ -428,11 +428,22 @@ abstract class RDD[T: ClassTag](
    * Return a new RDD containing only the elements that satisfy a predicate.
    */
   def filter(f: T => Boolean): RDD[T] = withScope {
+    // scalastyle:off println
+    println("FILTER in RDD executed with function:")
+    println(f)
+    // scalastyle:on println
+    val startTime = System.nanoTime()
     val cleanF = sc.clean(f)
-    new MapPartitionsRDD[T, T](
+    val ret = new MapPartitionsRDD[T, T](
       this,
       (_, _, iter) => iter.filter(cleanF),
       preservesPartitioning = true)
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1e6
+    // scalastyle:off println
+    println("FILTER in RDD execution time: " + duration + "ms")
+    // scalastyle:on println
+    ret
   }
 
   /**
