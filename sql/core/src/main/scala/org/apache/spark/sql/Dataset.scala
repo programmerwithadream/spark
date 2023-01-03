@@ -3866,6 +3866,12 @@ class Dataset[T] private[sql](
    * the internal error exception.
    */
   private def withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U) = {
+    // scalastyle:off println
+    println("WITHACTION IN DATASET WAS EXECUTED ON:")
+    println(name)
+    println(qe)
+    println(action)
+    // scalastyle:on println
     SQLExecution.withNewExecutionId(qe, Some(name)) {
       QueryExecution.withInternalError(s"""The "$name" action failed.""") {
         qe.executedPlan.resetMetrics()

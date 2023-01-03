@@ -774,6 +774,10 @@ class SparkSession private(
     // Use the active session thread local directly to make sure we get the session that is actually
     // set and not the default session. This to prevent that we promote the default session to the
     // active session once we are done.
+    // scalastyle:off println
+    println("WITHACTIVE IN SPARKSESSION WAS EXECUTED ON:")
+    println(block)
+    // scalastyle:on println
     val old = SparkSession.activeThreadSession.get()
     SparkSession.setActiveSession(this)
     try block finally {
