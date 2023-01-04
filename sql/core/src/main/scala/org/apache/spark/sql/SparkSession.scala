@@ -776,7 +776,6 @@ class SparkSession private(
     // active session once we are done.
     // scalastyle:off println
     println("WITHACTIVE IN SPARKSESSION WAS EXECUTED ON:")
-    println(block)
     // scalastyle:on println
     val old = SparkSession.activeThreadSession.get()
     SparkSession.setActiveSession(this)

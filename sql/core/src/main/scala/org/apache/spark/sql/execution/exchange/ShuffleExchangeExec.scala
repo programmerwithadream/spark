@@ -184,7 +184,9 @@ case class ShuffleExchangeExec(
   private var cachedShuffleRDD: ShuffledRowRDD = null
 
   protected override def doExecute(): RDD[InternalRow] = {
+    // scalastyle:off println
     println("doExecute in ShuffleExchangeExec")
+    // scalastyle:on println
     // Returns the same ShuffleRowRDD if this plan is used by multiple plans.
     if (cachedShuffleRDD == null) {
       cachedShuffleRDD = new ShuffledRowRDD(shuffleDependency, readMetrics)
