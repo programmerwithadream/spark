@@ -880,6 +880,15 @@ private[spark] class DAGScheduler(
       callSite: CallSite,
       resultHandler: (Int, U) => Unit,
       properties: Properties): JobWaiter[U] = {
+    // scalastyle:off println
+    println("SUBMITJOB IN DAGSCHEDULER WAS EXECUTED ON:")
+    println(rdd)
+    println(func)
+    println(partitions)
+    println(callSite)
+    println(resultHandler)
+    println(properties)
+    // scalastyle:on println
     // Check to make sure we are not launching a task on a partition that does not exist.
     val maxPartitions = rdd.partitions.length
     partitions.find(p => p >= maxPartitions || p < 0).foreach { p =>
