@@ -476,6 +476,7 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
   def executeTail(n: Int): Array[InternalRow] = executeTake(n, takeFromEnd = true)
 
   private def executeTake(n: Int, takeFromEnd: Boolean): Array[InternalRow] = {
+    val startTime = System.nanoTime()
     if (n == 0) {
       return new Array[InternalRow](0)
     }
@@ -545,7 +546,14 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
       }
       partsScanned += partsToScan.size
     }
-    buf.toArray
+    val ret = buf.toArray
+    val endTime = System.nanoTime()
+    val duration = (endTime - startTime) / 1e6
+    // scalastyle:off println
+    println("EXECUTETAKE in SparkPlan")
+    println("EXECUTETAKE duration: " + duration + "ms")
+    // scalastyle:on println
+    ret
   }
 
   /**

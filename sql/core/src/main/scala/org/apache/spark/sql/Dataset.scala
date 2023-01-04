@@ -1659,7 +1659,7 @@ class Dataset[T] private[sql](
     val ret = Filter(condition.expr, logicalPlan)
     val endTime = System.nanoTime()
     // scalastyle:off println
-    println("time: " + (endTime - startTime)/1e6 + "ms")
+    println("DATASET FILTER time: " + (endTime - startTime)/1e6 + "ms")
     // scalastyle:on println
     ret
   }
