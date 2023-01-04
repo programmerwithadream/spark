@@ -418,7 +418,6 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
    * Runs this query returning the result as an array.
    */
   def executeCollect(): Array[InternalRow] = {
-    val startTime = System.nanoTime()
     val byteArrayRdd = getByteArrayRdd()
 
     val results = ArrayBuffer[InternalRow]()
@@ -426,12 +425,9 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
       decodeUnsafeRows(countAndBytes._2).foreach(results.+=)
     }
     val ret = results.toArray
-    val endTime = System.nanoTime()
-    val duration = (endTime - startTime) / 1e6
     
     // scalastyle:off println
     println("EXECUTECOLLECT in SparkPlan")
-    println("EXECUTECOLLECT execution time: " + duration + "ms")
     println("RETURN VALUE from EXECUTECOLLECT")
     println(results)
     // scalastyle:on println
