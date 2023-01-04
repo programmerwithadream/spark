@@ -428,6 +428,7 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     val ret = results.toArray
     val endTime = System.nanoTime()
     val duration = (endTime - startTime) / 1e6
+    
     // scalastyle:off println
     println("EXECUTECOLLECT in SparkPlan")
     println("EXECUTECOLLECT execution time: " + duration + "ms")
