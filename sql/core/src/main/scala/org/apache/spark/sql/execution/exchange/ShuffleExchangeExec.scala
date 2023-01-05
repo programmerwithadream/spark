@@ -188,9 +188,13 @@ case class ShuffleExchangeExec(
     println("doExecute in ShuffleExchangeExec")
     // scalastyle:on println
     // Returns the same ShuffleRowRDD if this plan is used by multiple plans.
+    val start = System.nanoTime()
     if (cachedShuffleRDD == null) {
       cachedShuffleRDD = new ShuffledRowRDD(shuffleDependency, readMetrics)
     }
+    // scalastyle:off println
+    println("doExecute in ShuffExchangeExec duration: " + (System.nanoTime() - start) / 1e6 + "ms")
+    // scalastyle:on println
     cachedShuffleRDD
   }
 

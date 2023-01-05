@@ -888,6 +888,7 @@ private[spark] class DAGScheduler(
     println(callSite)
     println(resultHandler)
     println(properties)
+    println("END SUBMITJOB ARGUMENTS.")
     // scalastyle:on println
     // Check to make sure we are not launching a task on a partition that does not exist.
     val maxPartitions = rdd.partitions.length
