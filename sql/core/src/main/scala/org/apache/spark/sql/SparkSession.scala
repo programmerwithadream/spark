@@ -923,6 +923,7 @@ object SparkSession extends Logging {
      * @since 2.0.0
      */
     def getOrCreate(): SparkSession = synchronized {
+      val start = System.nanoTime()
       val sparkConf = new SparkConf()
       options.foreach { case (k, v) => sparkConf.set(k, v) }
 
@@ -967,6 +968,9 @@ object SparkSession extends Logging {
         setActiveSession(session)
         registerContextListener(sparkContext)
       }
+      // scalastyle:off println
+      println("SPARKSESSION GETORCREATE time: " + (System.nanoTime() - start) / 1e6 + "ms")
+      // scalastyle:on println
 
       return session
     }

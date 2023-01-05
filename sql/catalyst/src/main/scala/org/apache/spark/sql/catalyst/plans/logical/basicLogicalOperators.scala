@@ -168,6 +168,7 @@ case class Filter(condition: Expression, child: LogicalPlan)
   println(condition)
   println(child)
   // scalastyle:on println
+
   override def output: Seq[Attribute] = child.output
 
   override def maxRows: Option[Long] = child.maxRows

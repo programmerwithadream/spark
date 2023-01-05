@@ -191,7 +191,13 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     if (isCanonicalizedPlan) {
       throw new IllegalStateException("A canonicalized plan is not supposed to be executed.")
     }
-    doExecute()
+    val start = System.nanoTime()
+    val ret = doExecute()
+    // scalastyle:off println
+    println("DOEXECUTE MEASURED IN EXECUTE: " + (System.nanoTime() - start) / 1e6 + "ms")
+    // scalastyle:on println
+
+    ret
   }
 
   /**
