@@ -149,6 +149,9 @@ class QueryExecution(
   // executedPlan should not be used to initialize any SparkPlan. It should be
   // only used for execution.
   lazy val executedPlan: SparkPlan = {
+    // scalastyle:off println
+    println("executedPlan was EXECUTED ON:")
+    // scalastyle:on println
     // We need to materialize the optimizedPlan here, before tracking the planning phase, to ensure
     // that the optimization time is not counted as part of the planning phase.
     assertOptimized()
