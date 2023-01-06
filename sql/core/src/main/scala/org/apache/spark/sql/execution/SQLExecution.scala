@@ -62,6 +62,9 @@ object SQLExecution {
   def withNewExecutionId[T](
       queryExecution: QueryExecution,
       name: Option[String] = None)(body: => T): T = queryExecution.sparkSession.withActive {
+    // scalastyle:off println
+    println("withNewExecutionID executed")
+    // scalastyle:on println
     val sparkSession = queryExecution.sparkSession
     val sc = sparkSession.sparkContext
     val oldExecutionId = sc.getLocalProperty(EXECUTION_ID_KEY)
