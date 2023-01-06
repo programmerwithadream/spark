@@ -1727,6 +1727,9 @@ class Dataset[T] private[sql](
    */
   @scala.annotation.varargs
   def groupBy(cols: Column*): RelationalGroupedDataset = {
+    // scalastyle:off println
+    println("GROUPBY executed")
+    // scalastyle:on println
     RelationalGroupedDataset(toDF(), cols.map(_.expr), RelationalGroupedDataset.GroupByType)
   }
 
