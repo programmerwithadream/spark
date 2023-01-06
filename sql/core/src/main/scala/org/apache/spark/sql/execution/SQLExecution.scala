@@ -106,7 +106,14 @@ object SQLExecution {
             sparkPlanInfo = SparkPlanInfo.fromSparkPlan(queryExecution.executedPlan),
             time = System.currentTimeMillis(),
             redactedConfigs))
-          body
+
+          val ret = body
+          // scalastyle:off println
+          println("WITHNEWEXECUTIONID return value: ")
+          println(ret)
+          // scalastyle:on println
+
+          ret
         } catch {
           case e: Throwable =>
             ex = Some(e)

@@ -779,7 +779,13 @@ class SparkSession private(
     // scalastyle:on println
     val old = SparkSession.activeThreadSession.get()
     SparkSession.setActiveSession(this)
+
+    val startTime = System.nanoTime()
     try block finally {
+      val endTime = System.nanoTime()
+      // scalastyle:off println
+      println("WITHACTIVE block duration: " + (endTime - startTime)/1e6 + "ms")
+      // scalastyle:on println
       SparkSession.setActiveSession(old)
     }
   }
