@@ -120,6 +120,9 @@ object SQLExecution {
             throw e
         } finally {
           val endTime = System.nanoTime()
+          // scalastyle:off println
+          println("WITHNEWEXECUTIONID duration: " + (endTime - startTime)/1e6 + "ms")
+          // scalastyle:on println
           val event = SparkListenerSQLExecutionEnd(executionId, System.currentTimeMillis())
           // Currently only `Dataset.withAction` and `DataFrameWriter.runCommand` specify the `name`
           // parameter. The `ExecutionListenerManager` only watches SQL executions with name. We
