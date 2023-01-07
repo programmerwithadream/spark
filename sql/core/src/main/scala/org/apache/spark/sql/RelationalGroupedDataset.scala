@@ -266,7 +266,12 @@ class RelationalGroupedDataset protected[sql](
    *
    * @since 1.3.0
    */
-  def count(): DataFrame = toDF(Seq(Alias(Count(Literal(1)).toAggregateExpression(), "count")()))
+  def count(): DataFrame = {
+    // scalastyle:off println
+    println("COUNT executed")
+    // scalastyle:on println
+    toDF(Seq(Alias(Count(Literal(1)).toAggregateExpression(), "count")()))
+  }
 
   /**
    * Compute the average value for each numeric columns for each group. This is an alias for `avg`.

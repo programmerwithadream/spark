@@ -63,7 +63,11 @@ object SQLExecution {
       queryExecution: QueryExecution,
       name: Option[String] = None)(body: => T): T = queryExecution.sparkSession.withActive {
     // scalastyle:off println
+<<<<<<< HEAD
     println("WITHNEWEXECUTIONID WAS EXECUTED ON:")
+=======
+    println("withNewExecutionID executed")
+>>>>>>> 3f79ac4d3bb7ed5b94abb0638e8fe51bd943bad8
     // scalastyle:on println
     val sparkSession = queryExecution.sparkSession
     val sc = sparkSession.sparkContext
