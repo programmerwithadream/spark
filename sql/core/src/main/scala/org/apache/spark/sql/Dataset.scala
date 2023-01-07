@@ -193,6 +193,10 @@ class Dataset[T] private[sql](
     @DeveloperApi @Unstable @transient val encoder: Encoder[T])
   extends Serializable {
 
+  // scalastyle:off println
+  println("DATASET WAS EXECUTED.")
+  // scalastyle:on println
+
   @transient lazy val sparkSession: SparkSession = {
     if (queryExecution == null || queryExecution.sparkSession == null) {
       throw QueryExecutionErrors.transformationsAndActionsNotInvokedByDriverError()
@@ -217,6 +221,11 @@ class Dataset[T] private[sql](
   }
 
   @transient private[sql] val logicalPlan: LogicalPlan = {
+
+    // scalastyle:off println
+    println("VAL LOGICALPLAN IN DATASET WAS EXECUTED.")
+    // scalastyle:on println
+
     val plan = queryExecution.commandExecuted
     if (sparkSession.sessionState.conf.getConf(SQLConf.FAIL_AMBIGUOUS_SELF_JOIN_ENABLED)) {
       val dsIds = plan.getTagValue(Dataset.DATASET_ID_TAG).getOrElse(new HashSet[Long])
@@ -3906,6 +3915,10 @@ class Dataset[T] private[sql](
 
   /** A convenient function to wrap a logical plan and produce a Dataset. */
   @inline private def withTypedPlan[U : Encoder](logicalPlan: LogicalPlan): Dataset[U] = {
+    // scalastyle:off println
+    println("WITHTYPEDPLAN WAS EXECUTED ON: ")
+    println(logicalPlan)
+    // scalastyle:on println
     Dataset(sparkSession, logicalPlan)
   }
 

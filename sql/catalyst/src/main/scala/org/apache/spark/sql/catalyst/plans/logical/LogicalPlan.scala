@@ -35,6 +35,10 @@ abstract class LogicalPlan
   with QueryPlanConstraints
   with Logging {
 
+  // scalastyle:off println
+  println("LOGICALPLAN WAS EXECUTED.")
+  // scalastyle:on println
+
   /**
    * Metadata fields that can be projected from this node.
    * Should be overridden if the plan does not propagate its children's output.
@@ -204,10 +208,16 @@ trait LeafNode extends LogicalPlan with LeafLike[LogicalPlan] {
  * A logical plan node with single child.
  */
 trait UnaryNode extends LogicalPlan with UnaryLike[LogicalPlan] {
+
+  // scalastyle:off println
+  println("UNARYNODE WAS EXECUTED.")
+  // scalastyle:on println
+
   /**
    * Generates all valid constraints including an set of aliased constraints by replacing the
    * original constraint expressions with the corresponding alias
    */
+
   protected def getAllValidConstraints(projectList: Seq[NamedExpression]): ExpressionSet = {
     // scalastyle:off println
     println("GETALLVALIDCONSTRAINTS IN LOGICALPLAN WAS EXECUTED ON: ")

@@ -112,6 +112,12 @@ object Predicate extends CodeGeneratorWithInterpretedFallback[Expression, BasePr
 
 trait PredicateHelper extends AliasHelper with Logging {
   protected def splitConjunctivePredicates(condition: Expression): Seq[Expression] = {
+
+    // scalastyle:off println
+    println("SPLITCONJ.PRED. IN PREDICATEHELPER WAS EXECUTED ON:")
+    println(condition)
+    // scalastyle:on println
+
     condition match {
       case And(cond1, cond2) =>
         splitConjunctivePredicates(cond1) ++ splitConjunctivePredicates(cond2)

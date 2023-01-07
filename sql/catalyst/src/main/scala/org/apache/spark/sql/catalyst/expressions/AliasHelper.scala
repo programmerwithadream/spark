@@ -27,6 +27,10 @@ import org.apache.spark.sql.types.Metadata
  */
 trait AliasHelper {
 
+  // scalastyle:off println
+  println("ALIASHELPER WAS EXECUTED.")
+  // scalastyle:on println
+
   protected def getAliasMap(plan: Project): AttributeMap[Alias] = {
     // Create a map of Aliases to their values from the child projection.
     // e.g., 'SELECT a + b AS c, d ...' produces Map(c -> Alias(a + b, c)).
