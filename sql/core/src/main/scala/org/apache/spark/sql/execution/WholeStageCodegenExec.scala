@@ -626,6 +626,9 @@ object WholeStageCodegenExec {
  */
 case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
     extends UnaryExecNode with CodegenSupport {
+  // scalastyle:off println
+  println("WholeStageCodegenExec Class")
+  // scalastyle:on println
 
   override def output: Seq[Attribute] = child.output
 
@@ -655,6 +658,9 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
    * @return the tuple of the codegen context and the actual generated source.
    */
   def doCodeGen(): (CodegenContext, CodeAndComment) = {
+    // scalastyle:off println
+    println("doCodeGen in WholeStageCodegenExec")
+    // scalastyle:on println
     val startTime = System.nanoTime()
     val ctx = new CodegenContext
     val code = child.asInstanceOf[CodegenSupport].produce(ctx, this)
@@ -714,12 +720,18 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
   }
 
   override def doExecuteColumnar(): RDD[ColumnarBatch] = {
+    // scalastyle:off println
+    println("doExecuteColumnar in WholeStageCodegenExec")
+    // scalastyle:on println
     // Code generation is not currently supported for columnar output, so just fall back to
     // the interpreted path
     child.executeColumnar()
   }
 
   override def doExecute(): RDD[InternalRow] = {
+    // scalastyle:off println
+    println("doExecute in WholeStageCodegenExec")
+    // scalastyle:on println
     val (ctx, cleanedSource) = doCodeGen()
     // try to compile and fallback if it failed
     val (_, compiledCodeStats) = try {
