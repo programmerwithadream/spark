@@ -997,6 +997,9 @@ object SparkSession extends Logging {
    * @since 2.0.0
    */
   def setActiveSession(session: SparkSession): Unit = {
+    // scalastyle:off println
+    println("ACTIVE SESSION SWITCHED:")
+    // scalastyle:on println
     activeThreadSession.set(session)
   }
 

@@ -189,8 +189,15 @@ case class Filter(condition: Expression, child: LogicalPlan)
     ret
   }
 
-  override protected def withNewChildInternal(newChild: LogicalPlan): Filter =
+  override protected def withNewChildInternal(newChild: LogicalPlan): Filter = {
+
+    // scalastyle:off println
+    println("WITHNEWCHILDINTERNAL IN FILTER(BLO) WAS EXECUTED ON:")
+    println(newChild)
+    // scalastyle:on println
+
     copy(child = newChild)
+  }
 
 }
 

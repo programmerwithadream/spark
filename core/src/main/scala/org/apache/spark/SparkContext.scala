@@ -2194,6 +2194,9 @@ class SparkContext(config: SparkConf) extends Logging {
    * has overridden the call site using `setCallSite()`, this will return the user's version.
    */
   private[spark] def getCallSite(): CallSite = {
+    // scalastyle:off println
+    println("GETCALLSITE IN SPARKCONTEXT WAS EXECUTED ON:")
+    // scalastyle:on println
     lazy val callSite = Utils.getCallSite()
     CallSite(
       Option(getLocalProperty(CallSite.SHORT_FORM)).getOrElse(callSite.shortForm),
