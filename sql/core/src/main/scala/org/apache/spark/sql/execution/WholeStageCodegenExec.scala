@@ -708,6 +708,17 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
       }
       """.trim
 
+    // scalastyle:off println
+    println("doCodeGen cts")
+    println(ctx)
+    println()
+    println("doCodeGen ctx emitExtraCode")
+    println(ctx.emitExtraCode())
+    println()
+    println("doCodeGen ctx declareAddedFunctions")
+    println(ctx.declareAddedFunctions())
+    // scalastyle:on println
+
     // try to compile, helpful for debug
     val cleanedSource = CodeFormatter.stripOverlappingComments(
       new CodeAndComment(CodeFormatter.stripExtraNewLines(source), ctx.getPlaceHolderToComments()))
