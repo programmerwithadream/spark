@@ -136,6 +136,10 @@ case class ColumnarToRowExec(child: SparkPlan) extends ColumnarToRowTransition w
    * each batch.
    */
   override protected def doProduce(ctx: CodegenContext): String = {
+    // scalastyle:off println
+    println("doProduce in Columnar")
+    // scalastyle:on println
+    
     // PhysicalRDD always just has one input
     val input = ctx.addMutableState("scala.collection.Iterator", "input",
       v => s"$v = inputs[0];")
