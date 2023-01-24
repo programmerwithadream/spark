@@ -486,6 +486,15 @@ class CodegenContext extends Logging {
       funcName: String,
       funcCode: String,
       inlineToOuterClass: Boolean = false): String = {
+
+    // scalastyle:off println
+    println("addNewFunction in CodeGenerator executed on:")
+    println("funcName: " + funcName)
+    println("funcCode: ")
+    println(funcCode)
+    println("with inlineToOuterClass as: " + inlineToOuterClass)
+    // scalastyle:on println
+
     val newFunction = addNewFunctionInternal(funcName, funcCode, inlineToOuterClass)
     newFunction match {
       case NewFunctionSpec(functionName, None, None) => functionName
