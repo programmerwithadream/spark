@@ -665,6 +665,11 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
     val ctx = new CodegenContext
     val code = child.asInstanceOf[CodegenSupport].produce(ctx, this)
 
+    // scalastyle:off println
+    println("val code in doCodeGen: ")
+    println(code)
+    // scalastyle:on println
+
     // main next function.
     ctx.addNewFunction("processNext",
       s"""
@@ -709,7 +714,7 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
       """.trim
 
     // scalastyle:off println
-    println("doCodeGen cts")
+    println("doCodeGen ctx")
     println(ctx)
     println()
     println("doCodeGen ctx emitExtraCode")
