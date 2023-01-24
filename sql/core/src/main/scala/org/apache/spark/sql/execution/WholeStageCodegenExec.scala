@@ -658,17 +658,9 @@ case class WholeStageCodegenExec(child: SparkPlan)(val codegenStageId: Int)
    * @return the tuple of the codegen context and the actual generated source.
    */
   def doCodeGen(): (CodegenContext, CodeAndComment) = {
-<<<<<<< HEAD
-
-    // scalastyle:off println
-    println("doCodeGen was EXECUTED")
-    // scalastyle:on println
-
-=======
     // scalastyle:off println
     println("doCodeGen in WholeStageCodegenExec")
     // scalastyle:on println
->>>>>>> af2913452ce8a59dbe56a9780e41d4dc4af62486
     val startTime = System.nanoTime()
     val ctx = new CodegenContext
     val code = child.asInstanceOf[CodegenSupport].produce(ctx, this)
