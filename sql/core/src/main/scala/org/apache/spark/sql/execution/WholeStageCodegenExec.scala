@@ -485,7 +485,9 @@ trait InputRDDCodegen extends CodegenSupport {
     println()
     println()
     println("outputVars are as follows: ")
-    outputVars.foreach((x) => println(x))
+    if (!(outputVars == null)) {
+      outputVars.foreach((x) => println(x))
+    }
     println()
     println()
     // scalastyle:on println
