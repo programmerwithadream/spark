@@ -195,11 +195,18 @@ trait CodegenSupport extends SparkPlan {
     } else {
       parent.doConsume(ctx, inputVars, rowVar)
     }
-    s"""
+
+    val result = s"""
        |${ctx.registerComment(s"CONSUME: ${parent.simpleString(conf.maxToStringFields)}")}
        |$evaluated
        |$consumeFunc
      """.stripMargin
+    
+    // scalastyle: off println
+    println(result)
+    // scalastyle: on println
+
+    result
   }
 
   /**
