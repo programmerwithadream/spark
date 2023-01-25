@@ -201,10 +201,10 @@ trait CodegenSupport extends SparkPlan {
        |$evaluated
        |$consumeFunc
      """.stripMargin
-    
-    // scalastyle: off println
+
+    // scalastyle:off println
     println(result)
-    // scalastyle: on println
+    // scalastyle:on println
 
     result
   }
