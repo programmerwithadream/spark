@@ -26,9 +26,6 @@ object SQLOrderingUtil {
    *  3. -0.0 == 0.0
    */
   def compareDoubles(x: Double, y: Double): Int = {
-    // scalastyle:off println
-    println("compareDoubles in SQLOdrderingUtil")
-    // scalastyle:on println
     if (x == y) 0 else java.lang.Double.compare(x, y)
   }
 
@@ -41,4 +38,5 @@ object SQLOrderingUtil {
   def compareFloats(x: Float, y: Float): Int = {
     if (x == y) 0 else java.lang.Float.compare(x, y)
   }
+  
 }
