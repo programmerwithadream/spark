@@ -461,6 +461,15 @@ trait InputRDDCodegen extends CodegenSupport {
       forceInline = true)
     val row = ctx.freshName("row")
 
+    // scalastyle:off println
+    println("input in doProduce, inputRDD: " + input)
+    println()
+    println()
+    println("row in doProduce, inputRDD: " + row)
+    println()
+    println()
+    // scalastyle:on println
+
     val outputVars = if (createUnsafeProjection) {
       // creating the vars will make the parent consume add an unsafe projection.
       ctx.INPUT_ROW = row
@@ -472,13 +481,31 @@ trait InputRDDCodegen extends CodegenSupport {
       null
     }
 
+    // scalastyle:off println
+    println()
+    println()
+    println("outputVars are as follows: ")
+    outputVars.foreach((x) => println(x))
+    println()
+    println()
+    // scalastyle:on println
+
     val updateNumOutputRowsMetrics = if (metrics.contains("numOutputRows")) {
       val numOutputRows = metricTerm(ctx, "numOutputRows")
       s"$numOutputRows.add(1);"
     } else {
       ""
     }
-    s"""
+
+    // scalastyle:off println
+    println()
+    println()
+    println("updateNumOutputRowsMetrics is: " + updateNumOutputRowsMetrics)
+    println()
+    println()
+    // scalastyle:on println
+
+    val result = s"""
        | while ($limitNotReachedCond $input.hasNext()) {
        |   InternalRow $row = (InternalRow) $input.next();
        |   ${updateNumOutputRowsMetrics}
@@ -486,6 +513,22 @@ trait InputRDDCodegen extends CodegenSupport {
        |   ${shouldStopCheckCode}
        | }
      """.stripMargin
+
+    // scalastyle:off println
+    println()
+    println()
+    println("limitNotReachedCond is: " + limitNotReachedCond)
+    println("consume(ctx, outputVars, if (createUnsafeProjection) null else row).trim is: ")
+    println(consume(ctx, outputVars, if (createUnsafeProjection) null else row).trim)
+    println("shouldStopCheckCode is: ")
+    println(shouldStopCheckCode)
+    println("return of doProduce in inputRDD is: ")
+    println(result)
+    println()
+    println()
+    // scalastyle:on println
+
+    result
   }
 }
 
