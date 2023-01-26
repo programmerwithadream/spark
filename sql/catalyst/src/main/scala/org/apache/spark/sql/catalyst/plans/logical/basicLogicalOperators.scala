@@ -164,9 +164,9 @@ case class Generate(
 case class Filter(condition: Expression, child: LogicalPlan)
   extends OrderPreservingUnaryNode with PredicateHelper {
   // scalastyle:off println
-  println("FILTER IN BASICLOGICALOPERATORS WAS EXECUTED ON:")
-  println(condition)
-  println(child)
+  // println("FILTER IN BASICLOGICALOPERATORS WAS EXECUTED ON:")
+  // println(condition)
+  // println(child)
   // scalastyle:on println
 
   override def output: Seq[Attribute] = child.output
@@ -184,7 +184,7 @@ case class Filter(condition: Expression, child: LogicalPlan)
     val endTime = System.nanoTime()
     val duration = (endTime - startTime) / 1000000
     // scalastyle:off println
-    println("VALIDCONSTRAINTS IN FILTER-BASICLOGICALOPERATOR EXECUTION TIME WAS:" + duration + "ms")
+    // println("VALIDCONSTRAINTS IN FILTER-BASICLOGICALOPERATOR EXECUTION TIME WAS:" + duration + "ms")
     // scalastyle:on println
     ret
   }
@@ -192,8 +192,8 @@ case class Filter(condition: Expression, child: LogicalPlan)
   override protected def withNewChildInternal(newChild: LogicalPlan): Filter = {
 
     // scalastyle:off println
-    println("WITHNEWCHILDINTERNAL IN FILTER(BLO) WAS EXECUTED ON:")
-    println(newChild)
+    // println("WITHNEWCHILDINTERNAL IN FILTER(BLO) WAS EXECUTED ON:")
+    // println(newChild)
     // scalastyle:on println
 
     copy(child = newChild)

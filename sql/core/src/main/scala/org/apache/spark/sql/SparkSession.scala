@@ -775,7 +775,7 @@ class SparkSession private(
     // set and not the default session. This to prevent that we promote the default session to the
     // active session once we are done.
     // scalastyle:off println
-    println("WITHACTIVE IN SPARKSESSION WAS EXECUTED ON:")
+    // println("WITHACTIVE IN SPARKSESSION WAS EXECUTED ON:")
     // scalastyle:on println
     val old = SparkSession.activeThreadSession.get()
     SparkSession.setActiveSession(this)
@@ -784,7 +784,7 @@ class SparkSession private(
     try block finally {
       val endTime = System.nanoTime()
       // scalastyle:off println
-      println("WITHACTIVE block duration: " + (endTime - startTime)/1e6 + "ms")
+      // println("WITHACTIVE block duration: " + (endTime - startTime)/1e6 + "ms")
       // scalastyle:on println
       SparkSession.setActiveSession(old)
     }
@@ -975,7 +975,7 @@ object SparkSession extends Logging {
         registerContextListener(sparkContext)
       }
       // scalastyle:off println
-      println("SPARKSESSION GETORCREATE time: " + (System.nanoTime() - start) / 1e6 + "ms")
+      // println("SPARKSESSION GETORCREATE time: " + (System.nanoTime() - start) / 1e6 + "ms")
       // scalastyle:on println
 
       return session
@@ -998,7 +998,7 @@ object SparkSession extends Logging {
    */
   def setActiveSession(session: SparkSession): Unit = {
     // scalastyle:off println
-    println("ACTIVE SESSION SWITCHED:")
+    // println("ACTIVE SESSION SWITCHED:")
     // scalastyle:on println
     activeThreadSession.set(session)
   }

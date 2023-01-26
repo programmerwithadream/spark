@@ -194,7 +194,7 @@ class Dataset[T] private[sql](
   extends Serializable {
 
   // scalastyle:off println
-  println("DATASET WAS EXECUTED.")
+  // println("DATASET WAS EXECUTED.")
   // scalastyle:on println
 
   @transient lazy val sparkSession: SparkSession = {
@@ -223,7 +223,7 @@ class Dataset[T] private[sql](
   @transient private[sql] val logicalPlan: LogicalPlan = {
 
     // scalastyle:off println
-    println("VAL LOGICALPLAN IN DATASET WAS EXECUTED.")
+    // println("VAL LOGICALPLAN IN DATASET WAS EXECUTED.")
     // scalastyle:on println
 
     val plan = queryExecution.commandExecuted
@@ -1661,15 +1661,15 @@ class Dataset[T] private[sql](
    */
   def filter(condition: Column): Dataset[T] = withTypedPlan {
     // scalastyle:off println
-    println("FILTER 1 IN DATASET WAS EXECUTED ON:")
-    println(condition)
+    // println("FILTER 1 IN DATASET WAS EXECUTED ON:")
+    // println(condition)
     // scalastyle:on println
     val startTime = System.nanoTime()
     val ret = Filter(condition.expr, logicalPlan)
     val endTime = System.nanoTime()
     // scalastyle:off println
-    println("DATASET FILTER time: " + (endTime - startTime)/1e6 + "ms")
-    println()
+    // println("DATASET FILTER time: " + (endTime - startTime)/1e6 + "ms")
+    // println()
     // scalastyle:on println
     ret
   }
@@ -1685,8 +1685,8 @@ class Dataset[T] private[sql](
    */
   def filter(conditionExpr: String): Dataset[T] = {
     // scalastyle:off println
-    println("FILTER 2 IN DATASET WAS EXECUTED ON:")
-    println(conditionExpr)
+    // println("FILTER 2 IN DATASET WAS EXECUTED ON:")
+    // println(conditionExpr)
     // scalastyle:on println
     filter(Column(sparkSession.sessionState.sqlParser.parseExpression(conditionExpr)))
   }
@@ -1738,7 +1738,7 @@ class Dataset[T] private[sql](
   @scala.annotation.varargs
   def groupBy(cols: Column*): RelationalGroupedDataset = {
     // scalastyle:off println
-    println("GROUPBY executed")
+    // println("GROUPBY executed")
     // scalastyle:on println
     RelationalGroupedDataset(toDF(), cols.map(_.expr), RelationalGroupedDataset.GroupByType)
   }
@@ -3880,7 +3880,7 @@ class Dataset[T] private[sql](
    */
   private def withAction[U](name: String, qe: QueryExecution)(action: SparkPlan => U) = {
     // scalastyle:off println
-    println("WITHACTION IN DATASET WAS EXECUTED ON:")
+    // println("WITHACTION IN DATASET WAS EXECUTED ON:")
     // scalastyle:on println
     SQLExecution.withNewExecutionId(qe, Some(name)) {
       QueryExecution.withInternalError(s"""The "$name" action failed.""") {
@@ -3920,8 +3920,8 @@ class Dataset[T] private[sql](
   /** A convenient function to wrap a logical plan and produce a Dataset. */
   @inline private def withTypedPlan[U : Encoder](logicalPlan: LogicalPlan): Dataset[U] = {
     // scalastyle:off println
-    println("WITHTYPEDPLAN WAS EXECUTED ON: ")
-    println(logicalPlan)
+    // println("WITHTYPEDPLAN WAS EXECUTED ON: ")
+    // println(logicalPlan)
     // scalastyle:on println
     Dataset(sparkSession, logicalPlan)
   }

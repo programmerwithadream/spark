@@ -63,7 +63,7 @@ object SQLExecution {
       queryExecution: QueryExecution,
       name: Option[String] = None)(body: => T): T = queryExecution.sparkSession.withActive {
     // scalastyle:off println
-    println("WITHNEWEXECUTIONID WAS EXECUTED.")
+    // println("WITHNEWEXECUTIONID WAS EXECUTED.")
     // scalastyle:on println
     val sparkSession = queryExecution.sparkSession
     val sc = sparkSession.sparkContext
@@ -112,8 +112,8 @@ object SQLExecution {
 
           val ret = body
           // scalastyle:off println
-          println("WITHNEWEXECUTIONID return value: ")
-          println(ret)
+          // println("WITHNEWEXECUTIONID return value: ")
+          // println(ret)
           // scalastyle:on println
 
           ret
@@ -124,7 +124,7 @@ object SQLExecution {
         } finally {
           val endTime = System.nanoTime()
           // scalastyle:off println
-          println("WITHNEWEXECUTIONID duration: " + (endTime - startTime)/1e6 + "ms")
+          // println("WITHNEWEXECUTIONID duration: " + (endTime - startTime)/1e6 + "ms")
           // scalastyle:on println
           val event = SparkListenerSQLExecutionEnd(executionId, System.currentTimeMillis())
           // Currently only `Dataset.withAction` and `DataFrameWriter.runCommand` specify the `name`

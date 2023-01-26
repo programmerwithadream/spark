@@ -194,7 +194,7 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     val start = System.nanoTime()
     val ret = doExecute()
     // scalastyle:off println
-    println("DOEXECUTE MEASURED IN EXECUTE: " + (System.nanoTime() - start) / 1e6 + "ms")
+    // println("DOEXECUTE MEASURED IN EXECUTE: " + (System.nanoTime() - start) / 1e6 + "ms")
     // scalastyle:on println
 
     ret
@@ -435,10 +435,10 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     val endTime = System.nanoTime()
     val duration = (endTime - startTime) / 1e6
     // scalastyle:off println
-    println("EXECUTECOLLECT in SparkPlan")
-    println("EXECUTECOLLECT duration: " + duration + "ms")
-    println("RETURN VALUE from EXECUTECOLLECT")
-    println(results)
+    // println("EXECUTECOLLECT in SparkPlan")
+    // println("EXECUTECOLLECT duration: " + duration + "ms")
+    // println("RETURN VALUE from EXECUTECOLLECT")
+    // println(results)
     // scalastyle:on println
     ret
   }
@@ -556,8 +556,8 @@ abstract class SparkPlan extends QueryPlan[SparkPlan] with Logging with Serializ
     val endTime = System.nanoTime()
     val duration = (endTime - startTime) / 1e6
     // scalastyle:off println
-    println("EXECUTETAKE in SparkPlan")
-    println("EXECUTETAKE duration: " + duration + "ms")
+    // println("EXECUTETAKE in SparkPlan")
+    // println("EXECUTETAKE duration: " + duration + "ms")
     // scalastyle:on println
     ret
   }
