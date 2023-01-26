@@ -38,4 +38,5 @@ object SQLOrderingUtil {
   def compareFloats(x: Float, y: Float): Int = {
     if (x == y) 0 else java.lang.Float.compare(x, y)
   }
+  
 }

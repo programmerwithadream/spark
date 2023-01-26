@@ -139,7 +139,7 @@ case class ColumnarToRowExec(child: SparkPlan) extends ColumnarToRowTransition w
     // scalastyle:off println
     println("doProduce in Columnar")
     // scalastyle:on println
-    
+
     // PhysicalRDD always just has one input
     val input = ctx.addMutableState("scala.collection.Iterator", "input",
       v => s"$v = inputs[0];")
