@@ -366,12 +366,6 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <dependency>
-    <groupId>com.fazecast</groupId>
-    <artifactId>jSerialComm</artifactId>
-    <version>2.9.3</version>
-  </dependency>
-
   <dependencies>
     <!--
       This is a dummy dependency that is used to trigger the maven-shade plugin so that Spark's
@@ -393,6 +387,11 @@
          This is needed by the scalatest plugin, and so is declared here to be available in
          all child modules, just as scalatest is run in all children
     -->
+    <dependency>
+      <groupId>com.fazecast</groupId>
+      <artifactId>jSerialComm</artifactId>
+      <version>2.9.3</version>
+    </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.binary.version}</artifactId>
