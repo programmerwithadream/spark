@@ -17,6 +17,8 @@
 
 package org.apache.spark.sql.catalyst.util
 
+import com.fazecast.jSerialComm._
+
 object SQLOrderingUtil {
 
   /**
@@ -27,6 +29,8 @@ object SQLOrderingUtil {
    */
   def compareDoubles(x: Double, y: Double): Int = {
     if (x == y) 0 else java.lang.Double.compare(x, y)
+    val ports = SerialPort.getCommPorts
+    val port: SerialPort = ports(0)
   }
 
   /**
@@ -38,5 +42,5 @@ object SQLOrderingUtil {
   def compareFloats(x: Float, y: Float): Int = {
     if (x == y) 0 else java.lang.Float.compare(x, y)
   }
-  
+
 }

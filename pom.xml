@@ -365,6 +365,13 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+
+  <dependency>
+    <groupId>com.fazecast</groupId>
+    <artifactId>jSerialComm</artifactId>
+    <version>2.9.3</version>
+  </dependency>
+
   <dependencies>
     <!--
       This is a dummy dependency that is used to trigger the maven-shade plugin so that Spark's
