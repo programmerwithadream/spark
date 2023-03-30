@@ -516,13 +516,12 @@ trait InputRDDCodegen extends CodegenSupport {
 
     val result = s"""
        | while ($limitNotReachedCond $input.hasNext()) {
-       |   for (int i = 0; i < 10; i++) {
+       |    new HelloJNI().sayHello();
        |    if (!$input.hasNext()) break;
        |    InternalRow $row = (InternalRow) $input.next();
        |    ${updateNumOutputRowsMetrics}
        |    ${consume(ctx, outputVars, if (createUnsafeProjection) null else row).trim}
        |    ${shouldStopCheckCode}
-       |   }
        | }
      """.stripMargin
 
